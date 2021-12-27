@@ -1,33 +1,55 @@
----
-id: configuration
-title: Configuration
----
-
-By default, htmlhint looks for a `.htmlhintrc` file in the current directory and all parent directories, and applies its rules when parsing a file:
-
-```sh
-$ htmlhint index.html
-```
-
-To provide a custom configuration file to the command, use the `--config` option:
-
-```sh
-$ htmlhint --config htmlhint.conf index.html
-```
-
-Custom rules can also be specified individually, via the `--rules` option:
-
-```sh
-$ htmlhint --rules tag-pair,id-class-value=underline index.html
-```
-
-Finally, rules can be specified inline directly in the HTML document:
-
-<!-- prettier-ignore -->
-```html
-<!-- htmlhint tag-pair,id-class-value:underline -->
+<!DOCTYPE html>
 <html>
-  <head>...</head>
-  <body>...</body>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<script type="text/javascript">
+		var outcome = Math.floor(Math.random()*10 + 1);
+		var max=100;
+		var min=1;
+	
+		function star(){
+			if(event.keyCode ==13){
+				document.getElementById('play').click();
+			}
+		}
+		function see(){
+			var num=document.getElementById('num').value;
+			if(num ==outcome){
+				alert('haha Right!');
+			}
+			else if(num>outcome){
+				max = outcome;
+				show();
+				document.getElementById('num').value='';
+				}
+			else{
+				min = outcome;
+				show();
+				document.getElementById('num').value='';
+				}
+		}
+		function show(){
+			var element = document.createElement('div');
+			var text=document.createTextNode(min+ '-' +max);
+			element.appendChild(text);
+		
+			document.getElementById('Result').appendChild(element);
+		}
+	</script>
+</head>
+<body onkeydown="star()">
+	<div style="width:600px;background-color: floralwhite;margin: 0auto;text-align: center;">	
+		<h1>Guessing Game</h1>
+		<form action="#" >
+			<br>Your Guess (1~100)</br>
+			<input type="text" id="num"size="65" maxlength="60">
+			<br><input type="button"id="play"value="play" onclick="see()" ></br>
+		</form>
+		<div id="Result">
+			<div>Result</div>
+		<div>
+	</div>
+</body>
 </html>
-```
